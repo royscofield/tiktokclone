@@ -1,13 +1,8 @@
 
 import {useEffect, useLayoutEffect, useState, useRef, useMemo, useReducer } from 'react'
 
-
-
-
-
-//reducer
-
-
+import {setJob, addJob, deleteJob} from './actions'
+import reducer ,{ initState } from './reducer'
 
 function App() {
 

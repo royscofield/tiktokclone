@@ -1,25 +1,33 @@
 import {SET_JOB, ADD_JOB, DELETE_JOB} from './constants'
 
 //init state
-const initState = {
+export const initState = {
     job : '',
     jobs : []
   }
 
   
-  const reducer = (state, action) =>
+const reducer = (state, action) =>
 {
+    let newState 
     switch(action.type)
     {
         case SET_JOB:
-            return {...state, job: action.payload}
+            newState =  {...state, job: action.payload}
+            break
         case ADD_JOB:
-            return {...state, jobs: [...state.jobs, action.payload]}
+            newState =  {...state, jobs: [...state.jobs, action.payload]}
+            break
         case DELETE_JOB:
             let newJob = [...state.jobs]
             newJob.splice(action.payload,1)
-            return {...state, jobs: newJob}
+            newState =  {...state, jobs: newJob}
+            break
         default:
             throw new Error('Invalid action.')
     }
+
+    return newState
 }
+
+export default reducer

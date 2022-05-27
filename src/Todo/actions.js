@@ -1,21 +1,21 @@
 import { SET_JOB, ADD_JOB, DELETE_JOB} from './constants'
 
 //payload
-const setJob = payload => {
+export const setJob = payload => {
     return {
       type: SET_JOB,
       payload
     }
   }
   
-  const addJob = payload => {
+export const addJob = payload => {
     return {
       type: ADD_JOB,
       payload
     }
   }
   
-  const deleteJob = payload => {
+export const deleteJob = payload => {
     return {
       type: DELETE_JOB,
       payload
