@@ -1,62 +1,25 @@
-import { useRef, useState } from 'react'
-import { useStore, actions } from './store'
+import { useRef } from 'react'
+import Video from './video'
 
 function App() {
 
-  const inputRef = useRef()
+    const videoRef = useRef()
 
-  const [idTodo, setIdTodo] = useState('')
-  const [changeButton, setChangeButton] = useState(false)
-  const [state, dispatch] = useStore()
+    const handlePlay = () =>
+    {
+        videoRef.current.play()
+    }
 
-  const handleClick = () =>
-  {
-      dispatch(actions.addTodo(state.todo))
-      dispatch(actions.getTodo(''))
-      inputRef.current.focus()
-  }
-
-  const handleEdit = (index, todo) =>
-  {
-      setChangeButton(!changeButton)
-      dispatch(actions.getTodo(todo))
-      setIdTodo(index)
-      inputRef.current.focus()
-  }
-
-  const handleUpdate = () =>
-  {
-      dispatch(actions.editTodo(idTodo, state.todo))
-      dispatch(actions.getTodo(''))
-      inputRef.current.focus()
-      setIdTodo('')
-      setChangeButton(!changeButton)
-  }
-
+    const handlePause = () =>
+    {
+        videoRef.current.pause()
+    }
+ 
   return (
         <div className="App" style={{padding: '20px'}}>
-            <h3>ToDo:</h3>
-            <input 
-                ref={inputRef}
-                value={state.todo}
-                placeholder="Enter todo..."
-                onChange={e => {dispatch(actions.getTodo(e.target.value))}}
-            />
-            <button
-                onClick={changeButton === false ? handleClick : handleUpdate }
-            >
-                {changeButton === false ? 'Add' : 'Update'}
-            </button>
-
-            <ul>
-              {state.todoList.map( (todo, index) => (
-                <li key={index}>
-                    {todo}
-                    <span onClick={ () => handleEdit(index, todo)}>&nbsp; edit </span>
-                    <span onClick={ () => dispatch(actions.deleteTodo(index))}> &times; </span>
-                </li>
-              ))}
-            </ul>
+            <Video  ref={videoRef}/>
+            <button onClick={handlePlay}>Play</button>
+            <button onClick={handlePause}>Pause</button>
         </div>
   );
 }
